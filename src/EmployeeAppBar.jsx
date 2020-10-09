@@ -43,7 +43,7 @@ export default function ButtonAppBar() {
           setLoading(false)
 
       })()
-  })
+  },[])
 
   return (
     <div className={classes.root}>
