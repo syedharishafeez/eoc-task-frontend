@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import url from "./urls";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,21 +56,20 @@ export default function ButtonAppBar() {
           
         </Toolbar>
       </AppBar>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-
-            <Grid container spacing={5}>
-            <Grid item xs={4} style={{display:"flex", justify:"flex-start"}}>
-                <InputLabel style={{color:"black", fontWeight:"600"}}>EMPLOYEE ID</InputLabel>
-            </Grid>
-            <Grid item xs={8} style={{display:"flex", justify:"flex-start"}}>
-                <InputLabel style={{color:"black"}}>ID</InputLabel>
-            </Grid>
-
+        <Grid item xs={12} >
+          <div className={classes.paper} style={{marginTop:"20px"}} >
+            {userDetail ? Object.entries(userDetail).map((user)=>{
+                return (<Grid container item xs={12} spacing={10}>
+                <Grid item xs={4} style={{display:"flex", justify:"flex-start"}}>
+                    <InputLabel style={{color:"black", fontWeight:"600"}}>{user[0]}</InputLabel>
+                </Grid>
+                <Grid item xs={8} style={{display:"flex", justify:"flex-start"}}>
+                    <InputLabel style={{color:"black"}}>{user[1]}</InputLabel>
+                </Grid>
+                </Grid>)
+            }) : <CircularProgress style={{marginTop:"100px"}}/>}
             
-            
-            </Grid>
-          </Paper>
+          </div>
         </Grid>
     </div>
   );
