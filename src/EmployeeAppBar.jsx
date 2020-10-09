@@ -11,13 +11,11 @@ import url from "./urls";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height:"100%"
   },
   title: {
     flexGrow: 1,
   },
   paper: {
-    height:"100%",
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -41,12 +39,11 @@ export default function ButtonAppBar() {
             },
           });
           let currentData = await currentDataJSON.json();
-          console.log("currentData = ",currentData);
           setUserDetail({...currentData.body})
           setLoading(false)
 
       })()
-  },[])
+  })
 
   return (
     <div className={classes.root}>
@@ -59,7 +56,6 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
         <Grid item xs={12}>
-            <div style={{height:"100%"}}>
           <Paper className={classes.paper}>
 
             <Grid container spacing={5}>
@@ -74,7 +70,6 @@ export default function ButtonAppBar() {
             
             </Grid>
           </Paper>
-          </div>
         </Grid>
     </div>
   );
