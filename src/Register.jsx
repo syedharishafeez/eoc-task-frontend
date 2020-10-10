@@ -145,15 +145,19 @@ export default function Login() {
         let currentData = await currentDataJSON.json();
         if (currentData.statusCode === 200) {
           // history.push("/");
-          enqueueSnackbar("Register Successful", { variant: "success" });
+          enqueueSnackbar(currentData.body.message, { variant: "success" });
         } else {
-          enqueueSnackbar("Invalid Input", { variant: "error" });
+          enqueueSnackbar(currentData.body.message, { variant: "error" });
         }
       } else {
         enqueueSnackbar("All fields are required", { variant: "error" });
       }
     } catch (ex) {
-      enqueueSnackbar("Invalid Credentials", { variant: "error" });
+      if (ex.statusCode === 400) {
+        enqueueSnackbar(ex.body.message, { variant: "error" });
+      } else {
+        enqueueSnackbar("Invalid Credentials", { variant: "error" });
+      }
     }
     setLoading(false);
   }
