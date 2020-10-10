@@ -101,7 +101,7 @@ export default function Login() {
   }
 
   useEffect(() => {
-    return (async function () {
+    (async function () {
       let currentDataJSON = await fetch(url.FETCH_ROLES, {
         method: "get",
         headers: {
@@ -113,6 +113,7 @@ export default function Login() {
 
       setRoles(currentData.body.data ? currentData.body.data : []);
     })();
+    return
   }, []);
 
   async function handleRegistration(e) {

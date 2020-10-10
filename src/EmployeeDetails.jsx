@@ -160,8 +160,9 @@ export default function EmployeeDetails(props) {
                   </InputLabel>
                 </Grid>
               </Grid>
-              )}
+              
             </>
+            
           ) : (
             <InputLabel style={{ color: "black", fontWeight: "600" }}>
               Kindly Login again
