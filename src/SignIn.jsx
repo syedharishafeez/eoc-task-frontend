@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import url from "./urls";
 import { useSnackbar } from "notistack";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {Link as RouterLink} from 'react-router-dom'
+import { Link as RouterLink } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const history = useHistory();
   const [userName, setUsername] = React.useState("");
@@ -89,16 +89,21 @@ export default function Login() {
         });
         let currentData = await currentDataJSON.json();
         if (currentData.statusCode === 200) {
+          props.setLoginEmployeeData(currentData.body.data);
           history.push("/profile");
-          enqueueSnackbar("Login Successful", { variant: "success" });
+          enqueueSnackbar(currentData.body.message, { variant: "success" });
         } else {
-          enqueueSnackbar("Invalid Credentials", { variant: "error" });
+          enqueueSnackbar(currentData.body.message, { variant: "error" });
         }
       } else {
         enqueueSnackbar("All fields are required", { variant: "error" });
       }
     } catch (ex) {
-      enqueueSnackbar("Invalid Credentials", { variant: "error" });
+      if (ex.statusCode === 400) {
+        enqueueSnackbar(ex.body.message, { variant: "error" });
+      } else {
+        enqueueSnackbar("Please Contact Administrator", { variant: "error" });
+      }
     }
     setLoading(false);
   }

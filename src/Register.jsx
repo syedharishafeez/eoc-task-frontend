@@ -156,7 +156,7 @@ export default function Login() {
       if (ex.statusCode === 400) {
         enqueueSnackbar(ex.body.message, { variant: "error" });
       } else {
-        enqueueSnackbar("Invalid Credentials", { variant: "error" });
+        enqueueSnackbar("Please Contact Administrator", { variant: "error" });
       }
     }
     setLoading(false);
